@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorBlue">#11ade1</color>
+    <color name="colorAccent">#000000</color>
+    <color name="signInBg">#00a3d9</color>
+    <color name="activated_color">#d9f2ff</color>
+    <color name="white">#ffffff</color>
+</resources>
