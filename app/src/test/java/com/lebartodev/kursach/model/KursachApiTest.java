@@ -1,10 +1,6 @@
 package com.lebartodev.kursach.model;
 
-import com.lebartodev.kursach.KursachApplication;
-
 import org.junit.Test;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +23,7 @@ public class KursachApiTest {
                 .build();
 
         KursachApi kursachApi =retrofit.create(KursachApi.class);
-        kursachApi.registration(new Auth("email","pass")).enqueue(new Callback<User>() {
+        kursachApi.registration(new Register("email","pass", false)).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 System.out.println(response.body().getEmail());

@@ -28,6 +28,7 @@
                 <ImageView
                     android:id="@+id/u_avatar"
                     android:layout_width="40dp"
+                    android:padding="10dp"
                     android:layout_height="40dp"
                     android:visibility="visible"
                     app:srcCompat="@drawable/add_photo" />
@@ -86,12 +87,11 @@
             android:textSize="14sp" />
 
     </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dfdfdf"/>
-
-
+        android:background="#dfdfdf" />
 
 
 </LinearLayout>

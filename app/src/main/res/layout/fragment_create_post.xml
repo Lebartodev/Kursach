@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.lebartodev.kursach.view.CreatePostFragment">
-    <include layout="@layout/toolbar_blue"/>
+
+    <include layout="@layout/toolbar_blue" />
+
     <EditText
         android:layout_marginTop="20dp"
         android:id="@+id/post_text"

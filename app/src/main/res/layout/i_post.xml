@@ -28,6 +28,7 @@
                 <ImageView
                     android:id="@+id/u_avatar"
                     android:layout_width="40dp"
+                    android:padding="7dp"
                     android:layout_height="40dp"
                     android:visibility="visible"
                     app:srcCompat="@drawable/add_photo" />
@@ -107,12 +108,33 @@
             android:textColor="#787878"
             android:textSize="11sp" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/favorite_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_star_active" />
+
+        <TextView
+            android:id="@+id/all_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:text="View all comments" />
+    </RelativeLayout>
+
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dfdfdf"/>
-
-
+        android:background="#dfdfdf" />
 
 
 </LinearLayout>

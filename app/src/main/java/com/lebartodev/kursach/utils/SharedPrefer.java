@@ -4,6 +4,8 @@ package com.lebartodev.kursach.utils;
  * Created by Александр on 08.02.2017.
  */
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lebartodev.kursach.model.Coordinates;
 import com.lebartodev.kursach.model.User;
@@ -26,6 +28,7 @@ public class SharedPrefer extends BaseSharedPrefer {
         return acc;
     }
     public static void setToken(String token) {
+        Log.d("TOKEN", "setToken: " +token);
         get().put("token", token);
     }
 
@@ -48,6 +51,14 @@ public class SharedPrefer extends BaseSharedPrefer {
         Gson gson = new Gson();
         return gson.fromJson(get().get("location",""),Coordinates.class);
 
+    }
+    public static void setCategory(String category) {
+        get().put("category", category);
+    }
+
+    public static String getCategory() {
+
+        return get().get("category", "ALL");
     }
 
 

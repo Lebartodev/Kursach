@@ -8,4 +8,6 @@ import com.lebartodev.kursach.model.Post;
 
 public interface BaseFeedPresenter {
     void onClickPost(Post post);
+    void onAddFavorite(Post post);
+    void initList(String code);
 }

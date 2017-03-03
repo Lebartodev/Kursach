@@ -9,4 +9,5 @@ import com.lebartodev.kursach.model.Post;
 public interface CreatePostPage {
     void onPostCreated(Post post);
 
+    void onError(String localizedMessage);
 }

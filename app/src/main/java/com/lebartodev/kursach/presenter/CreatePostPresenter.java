@@ -11,7 +11,7 @@ import com.lebartodev.kursach.view.CreatePostPage;
 public class CreatePostPresenter implements BaseCreatePostPresenter {
     private CreatePostPage cpPage;
     private IPostModel model;
-
+    private String currentCategory="";
     public CreatePostPresenter(CreatePostPage cpPage) {
         this.cpPage = cpPage;
         model = new PostModel();
@@ -20,9 +20,14 @@ public class CreatePostPresenter implements BaseCreatePostPresenter {
     @Override
     public void createPost(String text) {
 
-        model.createPost(text).subscribe(post -> {
+        model.createPost(text,currentCategory).subscribe(post -> {
            cpPage.onPostCreated(post);
-        });
+        },error->cpPage.onError(error.getLocalizedMessage()));
 
+    }
+
+    @Override
+    public void onPickCategory(String result) {
+        currentCategory=result;
     }
 }

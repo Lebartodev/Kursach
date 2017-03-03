@@ -7,6 +7,7 @@
     android:background="@color/colorBlue"
     android:fitsSystemWindows="true"
     android:minHeight="?attr/actionBarSize">
+
     <ImageView
         android:id="@+id/menuImage"
         android:layout_width="35dp"
@@ -24,6 +25,14 @@
         android:textColor="#ffffff"
         android:textSize="20dp" />
 
+    <ImageView
+        android:layout_gravity="right"
+        android:id="@+id/add_post"
+        android:layout_width="35dp"
+        android:padding="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/ic_add_post" />
 
 
 </android.support.v7.widget.Toolbar>

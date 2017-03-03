@@ -9,4 +9,7 @@ import com.lebartodev.kursach.model.Post;
 public interface FeedPage {
     void addPost(Post post);
 
+    void onError(String localizedMessage);
+
+    void onPostClicked(Post post);
 }

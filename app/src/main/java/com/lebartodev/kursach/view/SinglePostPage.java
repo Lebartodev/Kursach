@@ -10,7 +10,10 @@ import java.util.List;
  */
 
 public interface SinglePostPage {
-    void onCommentsLoaded(List<Comment> comments);
+    //void onCommentsLoaded(List<Comment> comments);
+
+    void addComment(Comment comments);
+
     void onCommentAdded();
 
 }

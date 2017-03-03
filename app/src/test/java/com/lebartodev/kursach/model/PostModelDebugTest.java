@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class PostModelDebugTest {
     @Test
     public void getPosts() throws Exception {
-        IPostModel postModel = new PostModelDebug();
+
         //postModel.getPosts().subscribe(post -> System.out.println(post.getUserName()+"|"+post.getText()),throwable -> System.out.println(throwable.getLocalizedMessage()),() ->assertEquals(1,1) );
     }
 

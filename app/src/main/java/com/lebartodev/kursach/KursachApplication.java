@@ -1,18 +1,9 @@
 package com.lebartodev.kursach;
 
 import android.app.Application;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.util.Base64;
-import android.util.Log;
 
-import com.google.gson.Gson;
 import com.lebartodev.kursach.model.KursachApi;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -26,10 +17,10 @@ public class KursachApplication extends Application {
     protected static KursachApplication instance;
     private Retrofit retrofit;
     private static KursachApi kursachApi;
-
     public static KursachApplication getInstance() {
         return instance;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -45,10 +36,11 @@ public class KursachApplication extends Application {
                 .client(okHttpClient)
                 .build();
 
-        kursachApi =retrofit.create(KursachApi.class);
+        kursachApi = retrofit.create(KursachApi.class);
 
         instance = this;
     }
+
     public static KursachApi getApi() {
         return kursachApi;
     }

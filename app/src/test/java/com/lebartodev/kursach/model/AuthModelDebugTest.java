@@ -13,7 +13,7 @@ public class AuthModelDebugTest {
     @Test
     public void authorization() throws Exception {
         IAuthModel model = new AuthModel();
-        model.registration("lebartodev@gmail.com","password")
+        model.registration("lebartodev@gmail.com","password",false)
                 .subscribe(user->assertEquals(user.getName(),"Sasha"),error-> System.out.println(error.getLocalizedMessage()));
         Thread.sleep(10000);
 

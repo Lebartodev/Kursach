@@ -1,6 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,12 +11,13 @@
         android:layout_height="0px"
         android:focusable="true"
         android:focusableInTouchMode="true" />
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/emailText_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="#efefef"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:textColorHint="#efefef">
 
         <EditText
 
@@ -51,26 +51,37 @@
             android:textColorHint="#ffffff" />
     </android.support.design.widget.TextInputLayout>
 
+    <CheckBox
+        android:id="@+id/advertiser_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+
+        android:buttonTint="#ffffff"
+        android:text="Advertiser"
+        android:textColor="#ffffff" />
+
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="LOGIN"
-        android:textColor="#ffffff"
+        android:layout_marginTop="50dp"
+
         android:background="@color/colorPrimary"
-        android:layout_marginTop="50dp" />
+        android:text="LOGIN"
+        android:textColor="#ffffff" />
+
     <Button
         android:id="@+id/register_button"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="REGISTER"
-        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"
         android:background="@color/colorPrimary"
-        android:layout_marginTop="20dp" />
+        android:text="REGISTER"
+        android:textColor="#ffffff" />
 </LinearLayout>

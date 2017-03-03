@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.github.mrengineer13.snackbar.SnackBar;
@@ -24,6 +25,7 @@ public class LoginFragment extends Fragment implements LoginPage {
     private Button loginButton;
     private Button registerButton;
     private BaseLoginPresenter presenter;
+    private CheckBox advertiserCheckbox;
 
     private View view;
 
@@ -40,18 +42,26 @@ public class LoginFragment extends Fragment implements LoginPage {
         passwordEdit = (EditText) view.findViewById(R.id.passwordText);
         loginButton = (Button) view.findViewById(R.id.loginButton);
         registerButton = (Button) view.findViewById(R.id.register_button);
-
-        emailEdit.setText("lebartodev@gmail.com");
+        advertiserCheckbox= (CheckBox) view.findViewById(R.id.advertiser_checkbox);
 
         loginButton.setOnClickListener(view1 -> {
             closeKeyboard();
-            presenter.register(emailEdit.getText().toString(), passwordEdit.getText().toString());
+            presenter.login(emailEdit.getText().toString(), passwordEdit.getText().toString());
+            emailEdit.setClickable(false);
+            loginButton.setClickable(false);
+            registerButton.setClickable(false);
+            passwordEdit.setClickable(false);
+            new SnackBar.Builder(getActivity()).withMessage("Please wait").show();
 
         });
         registerButton.setOnClickListener(view1 -> {
             closeKeyboard();
-            presenter.login(emailEdit.getText().toString(), passwordEdit.getText().toString());
-
+            presenter.register(emailEdit.getText().toString(), passwordEdit.getText().toString(),advertiserCheckbox.isChecked());
+            emailEdit.setClickable(false);
+            loginButton.setClickable(false);
+            registerButton.setClickable(false);
+            passwordEdit.setClickable(false);
+            new SnackBar.Builder(getActivity()).withMessage("Please wait").show();
         });
 
 
@@ -70,19 +80,22 @@ public class LoginFragment extends Fragment implements LoginPage {
     @Override
     public void onUserAuth(User user) {
         SharedPrefer.setAccount(user);
-        SharedPrefer.setToken("token");
+        SharedPrefer.setToken(user.getToken());
         closeKeyboard();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_main, new ProfileFragment())
                 .commit();
-        //new SnackBar.Builder(getActivity()).withMessage("Hello "+user.getName()+"!").show();
 
     }
 
     @Override
     public void onError(String message) {
         new SnackBar.Builder(getActivity()).withMessage(message).show();
+        emailEdit.setClickable(true);
+        loginButton.setClickable(true);
+        registerButton.setClickable(true);
+        passwordEdit.setClickable(true);
     }
 
     private void closeKeyboard() {

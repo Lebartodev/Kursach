@@ -5,4 +5,21 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_drawer_open">asd</string>
     <string name="navigation_drawer_close">asd</string>
+    <string-array name="categories">
+        <item>Select all</item>
+        <item>Medicine</item>
+        <item>Education</item>
+        <item>Jobs</item>
+        <item>Shopping</item>
+        <item>Flame</item>
+    </string-array>
+
+    <string-array name="categories_code">
+        <item>ALL</item>
+        <item>MED</item>
+        <item>EDU</item>
+        <item>JOB</item>
+        <item>SHO</item>
+        <item>FLA</item>
+    </string-array>
 </resources>

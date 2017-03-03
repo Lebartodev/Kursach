@@ -7,7 +7,7 @@ import io.reactivex.Observable;
  */
 
 public interface IAuthModel {
-    Observable<User> registration(String mail, String password);
+    Observable<User> registration(String mail, String password,boolean isAdvertiser);
     Observable<User> login(String mail, String password);
 
 }

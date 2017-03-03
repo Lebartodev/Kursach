@@ -5,11 +5,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
     android:layout_height="202dp">
+
     <ImageView
         android:id="@+id/profile_image"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/add_photo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ELLIOT"
+        android:text="Vadil"
         android:id="@+id/accountName"
         android:layout_alignTop="@+id/profile_image"
         android:layout_toRightOf="@+id/profile_image"
@@ -54,6 +54,7 @@
         android:layout_height="2dp"
         android:id="@+id/dividerMenu"
         android:layout_alignParentBottom="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,6 +67,6 @@
         android:lines="1"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
 
 </RelativeLayout>

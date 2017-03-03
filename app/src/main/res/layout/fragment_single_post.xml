@@ -107,18 +107,17 @@
             android:textColor="#787878"
             android:textSize="11sp" />
     </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dfdfdf"/>
+        android:background="#dfdfdf" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="5dp"
         android:id="@+id/comments_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

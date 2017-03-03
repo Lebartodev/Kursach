@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.github.mrengineer13.snackbar.SnackBar;
 import com.lebartodev.kursach.R;
+import com.lebartodev.kursach.model.User;
 import com.lebartodev.kursach.presenter.BaseProfilePresenter;
 import com.lebartodev.kursach.presenter.ProfilePresenter;
 import com.lebartodev.kursach.utils.SharedPrefer;
@@ -80,8 +81,10 @@ public class ProfileFragment extends Fragment implements ProfilePage {
 
 
     @Override
-    public void onUserUpdated() {
-        new SnackBar.Builder(getActivity()).withMessage("User saved!").show();
+    public void onUserUpdated(User user) {
+        ((TextView)getActivity().findViewById(R.id.accountName)).setText(user.getName());
+        ((TextView)getActivity().findViewById(R.id.accountMail)).setText(user.getEmail());
+        new SnackBar.Builder(getActivity()).withMessage("User updated!").show();
 
     }
 

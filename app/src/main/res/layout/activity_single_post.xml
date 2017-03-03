@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_blue" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/comments_list"
+        android:layout_below="@+id/toolbar_blue_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/relativeLayout" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/sendIcon"
+            android:layout_toStartOf="@+id/sendIcon"
+            android:ems="10"
+            android:layout_marginLeft="10dp"
+            android:inputType="textMultiLine"
+            android:textColor="#000000"
+            android:hint="Type comment here"
+            android:textColorHint="@color/common_google_signin_btn_text_dark_disabled" />
+
+        <ImageView
+            android:id="@+id/sendIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/paperplane" />
+    </RelativeLayout>
+
+</RelativeLayout>
+

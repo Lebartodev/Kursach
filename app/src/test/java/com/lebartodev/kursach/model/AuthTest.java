@@ -1,7 +1,6 @@
 package com.lebartodev.kursach.model;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import org.junit.Test;
 public class AuthTest {
     @Test
     public void getAuth() throws Exception {
-        Auth auth = new Auth("email","password");
+        Register auth = new Register("email","password", false);
         Gson gson = new Gson();
         System.out.println(gson.toJson(auth));
 

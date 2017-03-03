@@ -19,7 +19,7 @@ public class UserModelDebug implements IUserModel {
     }
 
     @Override
-    public Observable<User> updateUser(String name, String avatarUrl) {
+    public Observable<User> updateUser(String name) {
         return Observable.create(e -> {
             e.onNext(User.newBuilder()
                     .name(name)

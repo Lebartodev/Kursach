@@ -30,6 +30,14 @@ public class Comment {
         this.time = time;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public class Builder {
         private Builder() {
 

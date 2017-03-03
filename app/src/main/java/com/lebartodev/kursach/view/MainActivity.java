@@ -24,10 +24,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.jaeger.library.StatusBarUtil;
 import com.lebartodev.kursach.R;
 import com.lebartodev.kursach.model.Coordinates;
 import com.lebartodev.kursach.utils.SharedPrefer;
+import com.lebartodev.kursach.utils.Utils;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private DrawerLayout drawer_layout;
@@ -64,6 +64,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         int permissionCheckFINE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         return permissionCheckCOARSE == PackageManager.PERMISSION_GRANTED && permissionCheckFINE == PackageManager.PERMISSION_GRANTED;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        permissionRequest.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @SuppressWarnings({"MissingPermission"})
     public void startLocationRequest() {
@@ -73,19 +79,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
             mLocationRequest.setInterval(30000);
 
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    if (location != null) {
-                        Coordinates coordinates = new Coordinates(location.getLatitude(), location.getLongitude(), "V pizde tvoyei mamki");
-                        SharedPrefer.setLocation(coordinates);
-                    }
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, location -> {
+                if (location != null) {
+                    Coordinates coordinates = new Coordinates(location.getLatitude(),
+                            location.getLongitude(),
+                            Utils.getLocationName(MainActivity.this,location.getLatitude(),
+                                    location.getLongitude()));
+                    SharedPrefer.setLocation(coordinates);
                 }
             });
 
         } else {
             permissionRequest = PermissionHelper.with(this)
-                    .build(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+                    .build(Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
                     .onPermissionsDenied(onDenyAction)
                     .onPermissionsGranted(onGrantAction)
                     .request(20);
@@ -115,15 +122,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (SharedPrefer.getToken().equals(""))
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new LoginFragment(), "tag")
                     .commit();
-        else
-            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new ProfileFragment(), "tag")
+        else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new FeedFragment(), "tag")
                     .commit();
+        }
         initMenuClickListener();
         initMenu();
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorBlue), 50);
 
         buildGoogleApiClient();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initMenu();
     }
 
     private void initMenu() {
@@ -159,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                             .commit();
                     break;
             }
+            initMenu();
             return true;
         });
     }

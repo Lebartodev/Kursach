@@ -1,8 +1,7 @@
 package com.lebartodev.kursach.model;
 
-import android.util.Log;
-
 import com.lebartodev.kursach.KursachApplication;
+import com.lebartodev.kursach.utils.Utils;
 
 import io.reactivex.Observable;
 import retrofit2.Call;
@@ -16,22 +15,23 @@ import retrofit2.Response;
 public class AuthModel implements IAuthModel {
 
     @Override
-    public Observable<User> registration(String mail, String password) {
+    public Observable<User> registration(String mail, String password, boolean isAdvertiser) {
         return Observable.create(e -> {
 
-            KursachApplication.getApi().registration(new Auth(mail, password)).enqueue(new Callback<User>() {
+            KursachApplication.getApi().registration(new Register(mail, Utils.MD5(password), isAdvertiser)).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if(response.code()==409){
+                    if (response.code() == 409) {
                         e.onError(new Exception("This email already in database!"));
+                    } else {
+                        User user = response.body();
+                        e.onNext(user);
                     }
-                    User user = response.body();
-                    e.onNext(user);
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Log.d("MainActivity", t.getLocalizedMessage());
+                    e.onError(t);
                 }
             });
 
@@ -43,19 +43,21 @@ public class AuthModel implements IAuthModel {
     public Observable<User> login(String mail, String password) {
         return Observable.create(e -> {
 
-            KursachApplication.getApi().registration(new Auth(mail, password)).enqueue(new Callback<User>() {
+            KursachApplication.getApi().authentication(new Auth(mail, Utils.MD5(password))).enqueue(new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
-                    if(response.code()==409){
-                        e.onError(new Exception("This email already in database!"));
+                    if (response.code() == 404) {
+                        e.onError(new Exception("Cannot find user"));
                     }
-                    User user = response.body();
-                    e.onNext(user);
+                    else {
+                        User user = response.body();
+                        e.onNext(user);
+                    }
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Log.d("MainActivity", t.getLocalizedMessage());
+                    e.onError(t);
                 }
             });
 

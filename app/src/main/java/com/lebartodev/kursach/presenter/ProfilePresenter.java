@@ -1,7 +1,9 @@
 package com.lebartodev.kursach.presenter;
 
 import com.lebartodev.kursach.model.IUserModel;
+import com.lebartodev.kursach.model.UserModel;
 import com.lebartodev.kursach.model.UserModelDebug;
+import com.lebartodev.kursach.utils.SharedPrefer;
 import com.lebartodev.kursach.view.ProfilePage;
 
 /**
@@ -14,12 +16,17 @@ public class ProfilePresenter implements BaseProfilePresenter {
 
     public ProfilePresenter(ProfilePage pPage) {
         this.pPage = pPage;
-        model=new UserModelDebug();
+        model=new UserModel();
     }
 
     @Override
     public void changeProfile(String name) {
-        model.updateUser(name,"").subscribe(user->pPage.onUserUpdated(),error->pPage.onError());
+        model.updateUser(name).subscribe(user-> {
+            pPage.onUserUpdated(user);
+                    SharedPrefer.setAccount(user);
+        },
+                error->{pPage.onError();
+        });
 
     }
 }

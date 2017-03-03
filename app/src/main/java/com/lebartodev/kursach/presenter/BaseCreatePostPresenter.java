@@ -6,4 +6,6 @@ package com.lebartodev.kursach.presenter;
 
 public interface BaseCreatePostPresenter {
     void createPost(String text);
+
+    void onPickCategory(String result);
 }

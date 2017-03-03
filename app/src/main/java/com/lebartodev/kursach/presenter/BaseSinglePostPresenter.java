@@ -5,6 +5,6 @@ package com.lebartodev.kursach.presenter;
  */
 
 public interface BaseSinglePostPresenter {
-    void createComment(String text);
 
+    void createComment(String text, int postId);
 }

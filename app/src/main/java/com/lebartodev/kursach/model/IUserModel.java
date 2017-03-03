@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 
 public interface IUserModel {
     Observable<User> getUser();
-    Observable<User> updateUser(String name,String avatarUrl);
+    Observable<User> updateUser(String name);
     void sendLocation(double lat,double lng);
 
 }

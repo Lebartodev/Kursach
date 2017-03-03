@@ -5,7 +5,7 @@ package com.lebartodev.kursach.presenter;
  */
 
 public interface BaseLoginPresenter {
-    void register(String mail,String password);
+    void register(String mail,String password,boolean isAdvertiser);
     void login(String mail,String password);
     void onDestroy();
 }
