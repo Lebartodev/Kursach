@@ -75,7 +75,13 @@ public class ProfileFragment extends Fragment implements ProfilePage {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbarBlue);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         ((TextView) view.findViewById(R.id.text_white)).setText("PROFILE");
+        try {
+            ((TextView) getActivity().findViewById(R.id.accountName)).setText(SharedPrefer.getAccount().getName());
+            ((TextView) getActivity().findViewById(R.id.accountMail)).setText(SharedPrefer.getAccount().getEmail());
+        }
+        catch (Exception e){
 
+        }
 
     }
 

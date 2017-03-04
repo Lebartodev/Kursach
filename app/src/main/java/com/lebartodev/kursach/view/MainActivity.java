@@ -3,7 +3,6 @@ package com.lebartodev.kursach.view;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,7 +20,6 @@ import com.firetrap.permissionhelper.action.OnGrantAction;
 import com.firetrap.permissionhelper.helper.PermissionHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.lebartodev.kursach.R;
@@ -64,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         int permissionCheckFINE = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         return permissionCheckCOARSE == PackageManager.PERMISSION_GRANTED && permissionCheckFINE == PackageManager.PERMISSION_GRANTED;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         permissionRequest.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 if (location != null) {
                     Coordinates coordinates = new Coordinates(location.getLatitude(),
                             location.getLongitude(),
-                            Utils.getLocationName(MainActivity.this,location.getLatitude(),
+                            Utils.getLocationName(MainActivity.this, location.getLatitude(),
                                     location.getLongitude()));
                     SharedPrefer.setLocation(coordinates);
                 }
@@ -119,10 +118,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         setContentView(R.layout.activity_main);
         drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvView = (NavigationView) findViewById(R.id.nvView);
-        if (SharedPrefer.getToken().equals(""))
+        if (SharedPrefer.getToken().equals("")) {
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new LoginFragment(), "tag")
                     .commit();
-        else {
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new FeedFragment(), "tag")
                     .commit();
         }

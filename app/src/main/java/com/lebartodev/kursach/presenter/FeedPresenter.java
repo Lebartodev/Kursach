@@ -26,7 +26,7 @@ public class FeedPresenter implements BaseFeedPresenter {
     public FeedPresenter(FeedPage fPage) {
         this.fPage = fPage;
         model = new PostModel();
-        model.getPosts(new GetPosts(SharedPrefer.getLocation(),SharedPrefer.getToken(), "ALL"))
+        model.getPosts(new GetPosts(SharedPrefer.getLocation(),SharedPrefer.getToken(), SharedPrefer.getCategory()))
                 .flatMapIterable(posts -> posts)
                 .subscribe(fPage::addPost,error->{
                     fPage.onError(error.getLocalizedMessage());

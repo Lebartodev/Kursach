@@ -66,6 +66,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         post.getLocation().getLng(),
                         SharedPrefer.getLocation().getLat(),
                         SharedPrefer.getLocation().getLng()) + " km from you");
+
         if (post.isFavorite())
             holder.favorite_image.setImageResource(R.drawable.ic_star_active);
         else
@@ -79,6 +80,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             notifyItemChanged(position);
            // holder.favorite_image.setImageResource(R.drawable.ic_star_active);
         });
+        if(type.equals("FAVS")){
+            holder.favorite_image.setVisibility(View.INVISIBLE);
+        }
+        else
+            holder.favorite_image.setVisibility(View.VISIBLE);
 
     }
 

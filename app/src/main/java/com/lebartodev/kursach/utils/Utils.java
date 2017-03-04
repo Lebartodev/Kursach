@@ -54,7 +54,7 @@ public class Utils {
         } else if ((time) / (60 * 60) > 0) {
             return String.valueOf((time) / (60 * 60)) + " hour(s) ago";
         } else if ((time) / (60) > 0) {
-            return String.valueOf((time) / (60)) + " minutes(s) ago";
+            return String.valueOf((time) / (60)) + " min(s) ago";
         } else
             return "Just now";
 

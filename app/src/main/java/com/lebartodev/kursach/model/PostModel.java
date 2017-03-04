@@ -26,16 +26,21 @@ import retrofit2.Response;
 
 public class PostModel implements IPostModel {
     private String TAG = "PostModel";
+
     @Override
     public Observable<List<Post>> getPosts(GetPosts getPosts) {
-        Log.d(TAG, "getPosts: "+new Gson().toJson(getPosts));
+        Log.d(TAG, "getPosts: " + new Gson().toJson(getPosts));
         return Observable.create(e -> {
             KursachApplication.getApi().getPosts(getPosts).enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                     if (response.body() != null) {
-                        e.onNext(response.body());
-                        Log.d(TAG, "getPosts onResponse: "+new Gson().toJson(response.body()));
+                        Log.d(TAG, "getPosts onResponse: " + new Gson().toJson(response.body()));
+                        List<Post> resp = response.body();
+                        if (resp.size() > 0)
+                            e.onNext(resp);
+                        else
+                            e.onError(new Exception("Not found!"));
                     } else
                         e.onError(new Exception("Not found!"));
 
@@ -48,6 +53,7 @@ public class PostModel implements IPostModel {
             });
         });
     }
+
     @Override
     public Observable<List<Post>> getFavorites() {
         return Observable.create(e -> {
@@ -55,9 +61,13 @@ public class PostModel implements IPostModel {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                     if (response.body() != null) {
-                        Log.d(TAG, "getFavorites onResponse: "+new Gson().toJson(response.body()));
-                        e.onNext(response.body());
+                        List<Post> resp = response.body();
 
+                        Log.d(TAG, "getFavorites onResponse: " + new Gson().toJson(response.body()));
+                        if (resp.size() > 0)
+                            e.onNext(resp);
+                        else
+                            e.onError(new Exception("Not found!"));
                     } else
                         e.onError(new Exception("Not found!"));
 
@@ -113,7 +123,7 @@ public class PostModel implements IPostModel {
                         @Override
                         public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
                             e.onNext(response.body());
-                            Log.d(TAG, "getSinglePost onResponse: "+new Gson().toJson(response.body()));
+                            Log.d(TAG, "getSinglePost onResponse: " + new Gson().toJson(response.body()));
                         }
 
                         @Override
@@ -127,10 +137,10 @@ public class PostModel implements IPostModel {
     @Override
     public Single<Comment> createComment(String text, int postId) {
         return Single.create(e -> {
-            Comment comment=Comment.newBuilder().user(SharedPrefer.getAccount()).postId(postId).time(0).text(text).build();
+            Comment comment = Comment.newBuilder().user(SharedPrefer.getAccount()).postId(postId).time(0).text(text).build();
             KursachApplication
                     .getApi()
-                    .createComment(new CreateCommentDto(postId,text,SharedPrefer.getToken()))
+                    .createComment(new CreateCommentDto(postId, text, SharedPrefer.getToken()))
                     .enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
@@ -149,8 +159,8 @@ public class PostModel implements IPostModel {
 
     @Override
     public Single<Comment> addToFav(int id) {
-        FavoriteAddDto fa =  new FavoriteAddDto(id,SharedPrefer.getToken());
-        Log.d(TAG, "addToFav: "+new Gson().toJson(fa));
+        FavoriteAddDto fa = new FavoriteAddDto(id, SharedPrefer.getToken());
+        Log.d(TAG, "addToFav: " + new Gson().toJson(fa));
         return Single.create(e -> {
 
             KursachApplication
@@ -158,7 +168,7 @@ public class PostModel implements IPostModel {
                     .addToFavorite(fa).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    Log.d(TAG, "addToFav onResponse: "+new Gson().toJson(response.body()));
+                    Log.d(TAG, "addToFav onResponse: " + new Gson().toJson(response.body()));
                     e.onSuccess(new Comment());
                 }
 

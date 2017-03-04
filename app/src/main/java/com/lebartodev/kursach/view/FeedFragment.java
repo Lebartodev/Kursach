@@ -79,6 +79,7 @@ public class FeedFragment extends Fragment implements FeedPage {
         });
         presenter = new FeedPresenter(this);
         adapter = new PostAdapter(new ArrayList<Post>(), presenter);
+        adapter.setType(SharedPrefer.getCategory());
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         feedList.setLayoutManager(llm);
         feedList.setAdapter(adapter);
@@ -87,7 +88,10 @@ public class FeedFragment extends Fragment implements FeedPage {
             Intent intent = new Intent(getActivity(), FeedSortActivity.class);
             startActivityForResult(intent, 5);
         });
-        categoryText.setText(categoryMap.getNameByCode(SharedPrefer.getCategory()));
+        if (!SharedPrefer.getCategory().equals("FAVS"))
+            categoryText.setText(categoryMap.getNameByCode(SharedPrefer.getCategory()));
+        else
+            categoryText.setText("Saved posts");
         refreshFeedLayout.setOnRefreshListener(() -> {
             adapter.deleteAll();
             presenter.initList(SharedPrefer.getCategory());
