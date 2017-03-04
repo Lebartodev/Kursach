@@ -71,6 +71,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             holder.favorite_image.setImageResource(R.drawable.ic_star_active);
         else
             holder.favorite_image.setImageResource(R.drawable.ic_star_unactive);
+        if(post.getUser().isAdvertiser()){
+            holder.all_comments.setText("Post ad");
+        }
 
         holder.item.setOnClickListener(view -> presenter.onClickPost(post));
 
@@ -95,7 +98,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView userName, time, location, title, place;
+        private TextView userName, time, location, title, place,all_comments;
         private View item;
 
         private ImageView favorite_image;
@@ -110,6 +113,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             title = (TextView) itemView.findViewById(R.id.post_title);
             place = (TextView) itemView.findViewById(R.id.post_place);
             favorite_image = (ImageView) itemView.findViewById(R.id.favorite_image);
+            all_comments = (TextView) itemView.findViewById(R.id.all_comments);
 
         }
     }

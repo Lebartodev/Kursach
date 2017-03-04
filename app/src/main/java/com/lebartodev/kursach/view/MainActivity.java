@@ -171,6 +171,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     fm2.beginTransaction().replace(R.id.activity_main, new ProfileFragment(), "tag")
                             .commit();
                     break;
+                case R.id.nav_logout:
+                    SharedPrefer.setToken("");
+                    getSupportFragmentManager().beginTransaction().replace(R.id.activity_main, new LoginFragment(), "tag")
+                            .commit();
+                    drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                    break;
             }
             initMenu();
             return true;

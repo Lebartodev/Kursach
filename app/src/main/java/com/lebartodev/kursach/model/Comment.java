@@ -6,7 +6,7 @@ package com.lebartodev.kursach.model;
 
 public class Comment {
     private String text;
-    private long time;
+    private long timeOffset;
     private User user;
     private int postId;
 
@@ -23,11 +23,11 @@ public class Comment {
     }
 
     public long getTime() {
-        return time;
+        return timeOffset;
     }
 
     public void setTime(long time) {
-        this.time = time;
+        this.timeOffset = time;
     }
 
     public User getUser() {
@@ -48,8 +48,8 @@ public class Comment {
         }
 
 
-        public Builder time(long time) {
-            Comment.this.time = time;
+        public Builder time(long timeOffset) {
+            Comment.this.timeOffset = timeOffset;
             return this;
         }
         public Builder user(User user) {
